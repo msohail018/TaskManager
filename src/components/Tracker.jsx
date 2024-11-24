@@ -49,7 +49,9 @@ const Tracker = () => {
   return (
     <div
       className={`${
-        isLight ? "bg-gray-100 text-gray-800" : "bg-gray-900 text-white"
+        isLight
+          ? "bg-[#f8f9fa] text-[#212529]"
+          : "bg-[#121212] text-[#ffffff]"
       } min-h-screen`}
     >
       <div className="pt-10 max-w-4xl mx-auto">
@@ -58,7 +60,11 @@ const Tracker = () => {
           <h1 className="text-4xl font-bold">Task Tracker</h1>
           <button
             onClick={() => setIsLight((prev) => !prev)}
-            className="p-2 rounded-full bg-gray-300 dark:bg-gray-700 hover:bg-gray-400"
+            className={`p-2 rounded-full ${
+              isLight
+                ? "bg-[#e9ecef] hover:bg-[#d6d8db]"
+                : "bg-[#272727] hover:bg-[#383838]"
+            }`}
           >
             {isLight ? (
               <DarkModeIcon fontSize="large" />
@@ -74,7 +80,11 @@ const Tracker = () => {
           onSubmit={handleSubmit}
         >
           <input
-            className="flex-grow border border-gray-300 rounded-lg p-2 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className={`flex-grow border ${
+              isLight
+                ? "bg-[#ffffff] text-[#212529]"
+                : "bg-[#1e1e1e] text-[#ffffff]"
+            } border-gray-300 rounded-lg p-2 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
             type="text"
             value={newTodo}
             onChange={(e) => setNewTodo(e.target.value)}
@@ -82,12 +92,16 @@ const Tracker = () => {
           />
           <button
             type="submit"
-            className="px-6 py-2 bg-blue-500 text-white rounded-lg shadow-lg hover:bg-blue-600"
+            className="px-6 py-2 bg-[#007bff] text-white rounded-lg shadow-lg hover:bg-[#0056b3]"
           >
             Add Task
           </button>
           <input
-            className="flex-grow md:flex-grow-0 border border-gray-300 rounded-lg p-2 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className={`flex-grow md:flex-grow-0 border ${
+              isLight
+                ? "bg-[#ffffff] text-[#212529]"
+                : "bg-[#1e1e1e] text-[#ffffff]"
+            } border-gray-300 rounded-lg p-2 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -108,13 +122,17 @@ const Tracker = () => {
                 key={todo.id}
                 className={`flex items-center justify-between p-4 border rounded-lg shadow-md ${
                   todo.isDone
-                    ? "bg-green-200 dark:bg-green-700"
-                    : "text-white bg-white dark:bg-gray-800"
+                    ? isLight
+                      ? "bg-[#d4edda] text-[#155724]"
+                      : "bg-[#272727] text-[#ffffff]"
+                    : isLight
+                    ? "bg-[#e9ecef] text-[#212529]"
+                    : "bg-[#1e1e1e] text-[#ffffff]"
                 }`}
               >
                 <div className="flex flex-col flex-grow">
                   <span
-                    className={`text-lg text-white font-semibold ${
+                    className={`text-lg font-semibold ${
                       todo.isDone ? "line-through" : ""
                     }`}
                   >
@@ -125,9 +143,7 @@ const Tracker = () => {
                 <div className="flex items-center space-x-4">
                   {todo.isDone ? (
                     <DoneIcon className="text-green-500" />
-                  ) : (
-                    <></>
-                  )}
+                  ) : null}
                   <button
                     onClick={() => handleToggle(todo)}
                     className="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600"
