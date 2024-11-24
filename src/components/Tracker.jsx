@@ -114,7 +114,7 @@ const Tracker = () => {
               >
                 <div className="flex flex-col flex-grow">
                   <span
-                    className={`text-lg font-semibold ${
+                    className={`text-lg text-white font-semibold ${
                       todo.isDone ? "line-through" : ""
                     }`}
                   >
